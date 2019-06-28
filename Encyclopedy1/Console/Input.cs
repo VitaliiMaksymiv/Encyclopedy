@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Encyclopedy
 {
@@ -7,14 +8,14 @@ namespace Encyclopedy
         public static int ReadInt(string prompt, int min, int max)
         {
             Output.DisplayPrompt(prompt);
-            return Input.ReadInt(min, max);
+            return ReadInt(min, max);
         }
 
         public static int ReadInt(int min, int max)
         {
             int num;
-            for (num = Input.ReadInt(); num < min || num > max; num = Input.ReadInt())
-                Output.DisplayPrompt("Please enter an integer between {0} and {1} (inclusive)", (object)min, (object)max);
+            for (num = ReadInt(); num < min || num > max; num = ReadInt())
+                Output.DisplayPrompt($"Please enter an integer between {min} and {max} ");
             return num;
         }
 
@@ -36,35 +37,63 @@ namespace Encyclopedy
         {
             Output.DisplayPrompt(prompt);
             string password = "";
+            int counter = 0;
             while (true)
             {
 
                 var key = Console.ReadKey(true);
 
                 if (key.Key == ConsoleKey.Enter) break;
-                Console.Write("*");
-                password += key.KeyChar;
+                if (key.Key == ConsoleKey.Backspace && counter > 0)
+                {
+                    Console.Write("\b \b");
+                    password = password.Substring(0, (password.Length - 1));
+                    counter--;
 
+                }
+                else if (char.IsLetter(key.KeyChar) || char.IsNumber(key.KeyChar) || char.IsSymbol(key.KeyChar) || char.IsPunctuation(key.KeyChar))
+                { 
+                    Console.Write("*");
+                    password += key.KeyChar;
+                    counter++;
+                }
             }
+            Console.Write('\n');
 
             return password;
         }
 
-        public static TEnum ReadEnum<TEnum>(string prompt) where TEnum : struct, IConvertible, IComparable, IFormattable
+        //public static TEnum ReadEnum<TEnum>(string prompt) where TEnum : struct, IConvertible, IComparable, IFormattable
+        //{
+        //    Type enumType = typeof(TEnum);
+        //    if (!enumType.IsEnum)
+        //        throw new ArgumentException("TEnum must be an enumerated type");
+        //    Output.WriteLine(prompt);
+        //    Menu menu = new Menu();
+        //    TEnum choice = default(TEnum);
+        //    foreach (object obj in Enum.GetValues(enumType))
+        //    {
+        //        object value = obj;
+        //        menu.Add(Enum.GetName(enumType, value), () => choice = (TEnum)value);
+        //    }
+        //    menu.Display();
+        //    return choice;
+        //}
+
+        public static string ReadList(List<string> listString, string prompt)
         {
-            Type enumType = typeof(TEnum);
-            if (!enumType.IsEnum)
-                throw new ArgumentException("TEnum must be an enumerated type");
-            Output.WriteLine(prompt);
-            Menu menu = new Menu();
-            TEnum choice = default(TEnum);
-            foreach (object obj in Enum.GetValues(enumType))
-            {
-                object value = obj;
-                menu.Add(Enum.GetName(enumType, value), (Action)(() => choice = (TEnum)value));
-            }
-            menu.Display();
-            return choice;
+                Output.WriteLine(prompt);
+                Menu menu = new Menu();
+                string choice = default(string);
+                for (var i = 0; i < listString.Count; i++)
+                {
+                    string stringValue = listString[i];
+                    menu.Add(stringValue, () => choice = stringValue);
+                }
+                menu.Add("Go back", () => choice = "Go back");
+                menu.Display();
+                return choice;
+            
         }
     }
 }

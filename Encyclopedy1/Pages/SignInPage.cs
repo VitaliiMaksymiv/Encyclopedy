@@ -1,9 +1,9 @@
 ﻿namespace Encyclopedy
 {
-    class Page1 : MenuPage
+    class SignInPage : MenuPage
     {
-        public Page1(Program program)
-            : base("Page 1", program,
+        public SignInPage(Program program)
+            : base("Sign In Page", program,
                   new Option("Log In", () => program.NavigateTo<LogInPage>()),
                   new Option("Register", () => program.NavigateTo<RegisterPage>()))
         {

@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Encyclopedy
 {
-    public partial class Article
+    public class Article
     {
         public Article()
         {
-            this.Edits = new HashSet<Edit>();
+            Edits = new HashSet<Edit>();
         }
         public int Id { get; set; }
         public int DisciplineId { get; set; }
@@ -15,7 +15,8 @@ namespace Encyclopedy
         public string Intro { get; set; }
         public string Content { get; set; }
         public string Main { get; set; }
-        public Nullable<int> Version { get; set; }
+        public int Version { get; set; }
+        [ForeignKey("User")]
         public string Lasteditor { get; set; }
 
         public virtual Discipline Discipline { get; set; }

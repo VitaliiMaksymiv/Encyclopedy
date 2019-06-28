@@ -4,47 +4,39 @@ namespace Encyclopedy
 {
     public class UnitOfWork : IDisposable
     {
-        private EncyclopedyContext db = new EncyclopedyContext();
-        private ArticleRepository articleRepository;
-        private DisciplineRepository disciplineRepository;
-        private EditRepository editRepository;
-        private UserRepository userRepository;
+        private bool _disposed;
+        private readonly EncyclopedyContext _db;
+        private Repository<int, Article> _articleRepository;
+        private Repository<int, Discipline> _disciplineRepository;
+        private Repository<int, Edit> _editRepository;
+        private Repository<string, User> _userRepository;
 
-        public ArticleRepository Articles
+        public UnitOfWork()
         {
-            get { return articleRepository ?? (articleRepository = new ArticleRepository(db)); }
+            _db = new EncyclopedyContext();
         }
+        public Repository<int, Article> Articles => _articleRepository ?? (_articleRepository = new Repository<int,Article>(_db));
 
-        public EditRepository Edits
-        {
-            get { return editRepository ?? (editRepository = new EditRepository(db)); }
-        }
+        public Repository<int, Edit> Edits => _editRepository ?? (_editRepository = new Repository<int, Edit>(_db));
 
-        public DisciplineRepository Disciplines
-        {
-            get { return disciplineRepository ?? (disciplineRepository = new DisciplineRepository(db)); }
-        }
+        public Repository<int, Discipline> Disciplines => _disciplineRepository ?? (_disciplineRepository = new Repository<int, Discipline>(_db));
 
-        public UserRepository Users
-        {
-            get { return userRepository ?? (userRepository = new UserRepository(db)); }
-        }
+        public Repository<string,User> Users => _userRepository ?? (_userRepository = new Repository<string, User>(_db));
+
         public void Save()
         {
-            db.SaveChanges();
+            _db.SaveChanges();
         }
-
-        private bool disposed = false;
 
         public virtual void Dispose(bool disposing)
         {
-            if (!this.disposed)
+            if (!_disposed)
             {
                 if (disposing)
                 {
-                    db.Dispose();
+                    _db.Dispose();
                 }
-                this.disposed = true;
+                _disposed = true;
             }
         }
 

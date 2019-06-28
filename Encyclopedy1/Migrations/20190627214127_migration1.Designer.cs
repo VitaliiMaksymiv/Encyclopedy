@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace Encyclopedy.Migrations
+namespace Encyclopedy1.Migrations
 {
     [DbContext(typeof(EncyclopedyContext))]
-    [Migration("20190624191101_CreateEncyclopedyDB")]
-    partial class CreateEncyclopedyDB
+    [Migration("20190627214127_migration1")]
+    partial class migration1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,7 +21,7 @@ namespace Encyclopedy.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Encyclopedy1.Article", b =>
+            modelBuilder.Entity("Encyclopedy.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -39,20 +39,18 @@ namespace Encyclopedy.Migrations
 
                     b.Property<string>("Title");
 
-                    b.Property<int?>("UserId");
-
                     b.Property<int?>("Version");
 
                     b.HasKey("Id");
 
                     b.HasIndex("DisciplineId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("Lasteditor");
 
                     b.ToTable("Articles");
                 });
 
-            modelBuilder.Entity("Encyclopedy1.Discipline", b =>
+            modelBuilder.Entity("Encyclopedy.Discipline", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -67,7 +65,7 @@ namespace Encyclopedy.Migrations
                     b.ToTable("Disciplines");
                 });
 
-            modelBuilder.Entity("Encyclopedy1.Edit", b =>
+            modelBuilder.Entity("Encyclopedy.Edit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,28 +83,23 @@ namespace Encyclopedy.Migrations
 
                     b.Property<string>("UserId");
 
-                    b.Property<int?>("UserId1");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ArticleId");
 
-                    b.HasIndex("UserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Edits");
                 });
 
-            modelBuilder.Entity("Encyclopedy1.User", b =>
+            modelBuilder.Entity("Encyclopedy.User", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Login")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("Editnum");
 
                     b.Property<string>("Email");
-
-                    b.Property<string>("Login");
 
                     b.Property<string>("Name");
 
@@ -114,32 +107,32 @@ namespace Encyclopedy.Migrations
 
                     b.Property<string>("Surname");
 
-                    b.HasKey("Id");
+                    b.HasKey("Login");
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("Encyclopedy1.Article", b =>
+            modelBuilder.Entity("Encyclopedy.Article", b =>
                 {
-                    b.HasOne("Encyclopedy1.Discipline", "Discipline")
+                    b.HasOne("Encyclopedy.Discipline", "Discipline")
                         .WithMany("Articles")
                         .HasForeignKey("DisciplineId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Encyclopedy1.User", "User")
+                    b.HasOne("Encyclopedy.User", "User")
                         .WithMany("Articles")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("Lasteditor");
                 });
 
-            modelBuilder.Entity("Encyclopedy1.Edit", b =>
+            modelBuilder.Entity("Encyclopedy.Edit", b =>
                 {
-                    b.HasOne("Encyclopedy1.Article", "Article")
+                    b.HasOne("Encyclopedy.Article", "Article")
                         .WithMany("Edits")
                         .HasForeignKey("ArticleId");
 
-                    b.HasOne("Encyclopedy1.User", "User")
+                    b.HasOne("Encyclopedy.User", "User")
                         .WithMany("Edits")
-                        .HasForeignKey("UserId1");
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

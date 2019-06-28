@@ -2,11 +2,11 @@
 
 namespace Encyclopedy
 {
-    public partial class Discipline
+    public class Discipline
     {
         public Discipline()
         {
-            this.Articles = new HashSet<Article>();
+            Articles = new HashSet<Article>();
         }
 
         public int Id { get; set; }

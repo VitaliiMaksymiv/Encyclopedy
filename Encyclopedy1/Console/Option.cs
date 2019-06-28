@@ -10,13 +10,13 @@ namespace Encyclopedy
 
         public Option(string name, Action callback)
         {
-            this.Name = name;
-            this.Callback = callback;
+            Name = name;
+            Callback = callback;
         }
 
         public override string ToString()
         {
-            return this.Name;
+            return Name;
         }
     }
 }

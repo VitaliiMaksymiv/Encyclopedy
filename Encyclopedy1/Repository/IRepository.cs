@@ -2,12 +2,12 @@
 
 namespace Encyclopedy
 {
-    public interface IRepository<T> where T : class
+    public interface IRepository<K,T> where T : class
     {
         IEnumerable<T> GetAll();
-        T Get(int id);
+        T Get(K id);
         void Create(T item);
         void Update(T item);
-        void Delete(int id);
+        void Delete(K id);
     }
 }

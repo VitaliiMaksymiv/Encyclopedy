@@ -10,30 +10,30 @@ namespace Encyclopedy
 
         public Menu()
         {
-            this.Options = (IList<Option>)new List<Option>();
+            Options = new List<Option>();
         }
 
         public void Display()
         {
-            for (int index = 0; index < this.Options.Count; ++index)
-                Console.WriteLine("{0}. {1}", (object)(index + 1), (object)this.Options[index].Name);
-            this.Options[Input.ReadInt("Choose an option:", 1, this.Options.Count) - 1].Callback();
+            for (var index = 0; index < Options.Count; ++index)
+                Console.WriteLine("{0}. {1}", index + 1, Options[index].Name);
+            Options[Input.ReadInt("Choose an option:", 1, Options.Count) - 1].Callback();
         }
 
         public Menu Add(string option, Action callback)
         {
-            return this.Add(new Option(option, callback));
+            return Add(new Option(option, callback));
         }
 
         public Menu Add(Option option)
         {
-            this.Options.Add(option);
+            Options.Add(option);
             return this;
         }
 
         public bool Contains(string option)
         {
-            return this.Options.FirstOrDefault<Option>((Func<Option, bool>)(op => op.Name.Equals(option))) != null;
+            return Options.FirstOrDefault(op => op.Name.Equals(option)) != null;
         }
     }
 }

@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Encyclopedy.Migrations
+namespace Encyclopedy1.Migrations
 {
-    public partial class CreateEncyclopedyDB : Migration
+    public partial class migration1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,9 +26,7 @@ namespace Encyclopedy.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Login = table.Column<string>(nullable: true),
+                    Login = table.Column<string>(nullable: false),
                     Password = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Surname = table.Column<string>(nullable: true),
@@ -37,7 +35,7 @@ namespace Encyclopedy.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Users", x => x.Login);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,8 +50,7 @@ namespace Encyclopedy.Migrations
                     Content = table.Column<string>(nullable: true),
                     Main = table.Column<string>(nullable: true),
                     Version = table.Column<int>(nullable: true),
-                    Lasteditor = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    Lasteditor = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,10 +62,10 @@ namespace Encyclopedy.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Articles_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Articles_Users_Lasteditor",
+                        column: x => x.Lasteditor,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "Login",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -83,8 +80,7 @@ namespace Encyclopedy.Migrations
                     Editable = table.Column<string>(nullable: true),
                     Oldtext = table.Column<string>(nullable: true),
                     Oldversion = table.Column<int>(nullable: false),
-                    EditDate = table.Column<DateTime>(nullable: false),
-                    UserId1 = table.Column<int>(nullable: true)
+                    EditDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -96,10 +92,10 @@ namespace Encyclopedy.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Edits_Users_UserId1",
-                        column: x => x.UserId1,
+                        name: "FK_Edits_Users_UserId",
+                        column: x => x.UserId,
                         principalTable: "Users",
-                        principalColumn: "Id",
+                        principalColumn: "Login",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -109,9 +105,9 @@ namespace Encyclopedy.Migrations
                 column: "DisciplineId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Articles_UserId",
+                name: "IX_Articles_Lasteditor",
                 table: "Articles",
-                column: "UserId");
+                column: "Lasteditor");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Edits_ArticleId",
@@ -119,9 +115,9 @@ namespace Encyclopedy.Migrations
                 column: "ArticleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Edits_UserId1",
+                name: "IX_Edits_UserId",
                 table: "Edits",
-                column: "UserId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

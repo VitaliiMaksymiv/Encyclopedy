@@ -11,21 +11,19 @@ namespace Encyclopedy
 
         public Page(string title, Program program)
         {
-            this.Title = title;
-            this.Program = program;
+            Title = title;
+            Program = program;
         }
 
         public virtual void Display()
         {
-            if (this.Program.History.Count > 1 && this.Program.BreadcrumbHeader)
-            {
-                string str1 = (string)null;
-                foreach (string str2 in this.Program.History.Select<Page, string>((Func<Page, string>)(page => page.Title)).Reverse<string>())
-                    str1 = str1 + str2 + " > ";
-                Console.WriteLine(str1.Remove(str1.Length - 3));
-            }
-            else
-                Console.WriteLine(this.Title);
+            Console.WriteLine(Title);
+            Console.WriteLine("---");
+        }
+
+        public virtual void Display(Article article)
+        {
+            Console.WriteLine(Title);
             Console.WriteLine("---");
         }
     }

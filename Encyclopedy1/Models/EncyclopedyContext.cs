@@ -1,15 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Encyclopedy
 {
-    public partial class EncyclopedyContext : DbContext
+    public class EncyclopedyContext : DbContext
     {
-        //public EncyclopedyContext(DbContextOptions<EncyclopedyContext> options)
-        //    : base(options)
-        //{ }
-
         public EncyclopedyContext()
         {
             Database.EnsureCreated();
@@ -17,7 +11,7 @@ namespace Encyclopedy
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=EncyclopedyDB;Trusted_Connection=True;");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=EncyclopedyDB2;Trusted_Connection=True;");
         }
 
         public DbSet<User> Users { get; set; }

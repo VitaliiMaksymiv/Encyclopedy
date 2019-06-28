@@ -9,42 +9,27 @@ namespace Encyclopedy
     {
         private string Title { get; set; }
 
-        public bool BreadcrumbHeader { get; private set; }
-
-        private Page CurrentPage
-        {
-            get
-            {
-                return this.History.Any<Page>() ? this.History.Peek() : (Page)null;
-            }
-        }
+        private Page CurrentPage => History.Any() ? History.Peek() : null;
 
         private Dictionary<Type, Page> Pages { get; set; }
 
         public Stack<Page> History { get; private set; }
 
-        public bool NavigationEnabled
-        {
-            get
-            {
-                return this.History.Count > 1;
-            }
-        }
+        public bool NavigationEnabled => History.Count > 1;
 
-        public Program(string title, bool breadcrumbHeader)
+        public Program(string title)
         {
-            this.Title = title;
-            this.Pages = new Dictionary<Type, Page>();
-            this.History = new Stack<Page>();
-            this.BreadcrumbHeader = breadcrumbHeader;
+            Title = title;
+            Pages = new Dictionary<Type, Page>();
+            History = new Stack<Page>();
         }
 
         public virtual void Run()
         {
             try
             {
-                Console.Title = this.Title;
-                this.CurrentPage.Display();
+                Console.Title = Title;
+                CurrentPage.Display();
             }
             catch (Exception ex)
             {
@@ -59,48 +44,54 @@ namespace Encyclopedy
 
         public void AddPage(Page page)
         {
-            Type type = page.GetType();
-            if (this.Pages.ContainsKey(type))
-                this.Pages[type] = page;
+            var type = page.GetType();
+            if (Pages.ContainsKey(type))
+                Pages[type] = page;
             else
-                this.Pages.Add(type, page);
+                Pages.Add(type, page);
         }
 
         public void NavigateHome()
         {
-            while (this.History.Count > 1)
-                this.History.Pop();
+            while (History.Count > 1)
+                History.Pop();
             Console.Clear();
-            this.CurrentPage.Display();
+            CurrentPage.Display();
         }
 
         public T SetPage<T>() where T : Page
         {
-            Type key = typeof(T);
-            if (this.CurrentPage != null && this.CurrentPage.GetType() == key)
-                return this.CurrentPage as T;
+            var key = typeof(T);
+            if (CurrentPage != null && CurrentPage.GetType() == key)
+                return CurrentPage as T;
             Page page;
-            if (!this.Pages.TryGetValue(key, out page))
+            if (!Pages.TryGetValue(key, out page))
                 throw new KeyNotFoundException("The given page was not present in the program");
-            this.History.Push(page);
-            return this.CurrentPage as T;
+            History.Push(page);
+            return CurrentPage as T;
         }
 
         public T NavigateTo<T>() where T : Page
         {
-            this.SetPage<T>();
+            SetPage<T>();
             Console.Clear();
-            this.CurrentPage.Display();
-            return this.CurrentPage as T;
+            CurrentPage.Display();
+            return CurrentPage as T;
+        }
+        public T NavigateTo<T>(Article article) where T : Page
+        {
+            SetPage<T>();
+            Console.Clear();
+            CurrentPage.Display(article);
+            return CurrentPage as T;
         }
 
         public Page NavigateBack()
         {
-            this.History.Pop();
+            History.Pop();
             Console.Clear();
-            this.CurrentPage.Display();
-            return this.CurrentPage;
+            CurrentPage.Display();
+            return CurrentPage;
         }
-
     }
 }

@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Encyclopedy
 {
 
-    public partial class User
+    public class User
     {
         public User()
         {
-            this.Articles = new HashSet<Article>();
-            this.Edits = new HashSet<Edit>();
+            Articles = new HashSet<Article>();
+            Edits = new HashSet<Edit>();
         }
-        public int Id { get; set; }
+        [Key]
         public string Login { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Email { get; set; }
-        public Nullable<int> Editnum { get; set; }
+        public int? Editnum { get; set; }
 
         public virtual ICollection<Article> Articles { get; set; }
 
