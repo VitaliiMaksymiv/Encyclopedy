@@ -5,7 +5,7 @@ namespace Encyclopedy
     class ArticlePage: Page
     {
         public ArticlePage(Program program)
-            : base("",program)
+            : base("Article Page",program)
         {
         }
         //public Article article {get; private set; }
@@ -15,14 +15,17 @@ namespace Encyclopedy
             UnitOfWork db = new UnitOfWork();
             base.Display();
             Discipline discipline = db.Disciplines.Get(article.DisciplineId);
-            Output.WriteLine(ConsoleColor.DarkGreen, article.Title);
-            Output.WriteLine(ConsoleColor.Yellow, (discipline?.Branch+", "+discipline?.Subbranch));
-            Output.WriteLine(article.Intro);
-            Output.WriteLine(ConsoleColor.Blue, article.Content);
-            Output.WriteLine(article.Main);
+            Output.WriteLine(ConsoleColor.DarkGreen, article.Title + "\n");
+            Output.WriteLine(ConsoleColor.Yellow, (discipline?.Branch+", "+discipline?.Subbranch+ "\n"));
+            Output.WriteLine(article.Intro+ "\n");
+            Output.WriteLine(ConsoleColor.Blue, article.Content+ "\n");
+            Output.WriteLine(article.Main+ "\n");
 
-            Input.ReadString("Press [Enter] to navigate home");
-            Program.NavigateHome();
+            Output.WriteLine(ConsoleColor.DarkMagenta,"\nPress [E] to edit this article or another key to navigate home");
+            var key = Console.ReadKey(true);
+            if (key.Key == ConsoleKey.E)
+                Program.NavigateTo<EditPage>(article);
+            else Program.NavigateHome();
         }
 
     }

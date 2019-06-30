@@ -14,7 +14,7 @@ namespace Encyclopedy
         {
             base.Display();
 
-            Output.WriteLine(ConsoleColor.DarkYellow,"REGISTRATION FORM");
+            Output.WriteLine(ConsoleColor.DarkYellow,"REGISTRATION FORM:");
             string name = "";
             string surname = "";
             string login = "";

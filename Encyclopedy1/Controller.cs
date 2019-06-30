@@ -57,7 +57,6 @@ namespace Encyclopedy
         {
             UnitOfWork db = new UnitOfWork();
             var editableArticle = db.Articles.Get(articleId);
-            //var editorLogin = LoginedUser.GetInstance().User.Login;
             var editor = db.Users.Get(userLogin);
             var editableProperty = typeof(Article).GetProperty(editable);
             db.Edits.Create(new Edit()

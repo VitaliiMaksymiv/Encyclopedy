@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace Encyclopedy
 {
@@ -33,6 +35,32 @@ namespace Encyclopedy
             return Console.ReadLine();
         }
 
+        public static string ReadText(string prompt)
+        {
+            Output.DisplayPrompt(prompt);
+            Output.WriteLine(ConsoleColor.Red, "Write '!STOP!' to end! \n");
+            byte[] inputBuffer = new byte[4096];
+            Stream inputStream = Console.OpenStandardInput(inputBuffer.Length);
+            Console.SetIn(new StreamReader(inputStream, Console.InputEncoding, false, inputBuffer.Length));
+            string text = "";
+            while (true)
+            {
+                string line = Console.ReadLine();
+                if (line == "!STOP!")
+                {
+                    text = text.TrimEnd('\n');
+                    break;
+                }
+                else
+                {
+                    text += line;
+                    text += "\n";
+                }
+            }
+            Console.Write('\n');
+            return text;
+        }
+
         public static string ReadPassword(string prompt)
         {
             Output.DisplayPrompt(prompt);
@@ -62,23 +90,6 @@ namespace Encyclopedy
 
             return password;
         }
-
-        //public static TEnum ReadEnum<TEnum>(string prompt) where TEnum : struct, IConvertible, IComparable, IFormattable
-        //{
-        //    Type enumType = typeof(TEnum);
-        //    if (!enumType.IsEnum)
-        //        throw new ArgumentException("TEnum must be an enumerated type");
-        //    Output.WriteLine(prompt);
-        //    Menu menu = new Menu();
-        //    TEnum choice = default(TEnum);
-        //    foreach (object obj in Enum.GetValues(enumType))
-        //    {
-        //        object value = obj;
-        //        menu.Add(Enum.GetName(enumType, value), () => choice = (TEnum)value);
-        //    }
-        //    menu.Display();
-        //    return choice;
-        //}
 
         public static string ReadList(List<string> listString, string prompt)
         {

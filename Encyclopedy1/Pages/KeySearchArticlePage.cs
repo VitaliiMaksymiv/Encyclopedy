@@ -10,7 +10,7 @@ namespace Encyclopedy
     class KeySearchArticlePage : Page
     {
         public KeySearchArticlePage(Program program)
-            : base("Search Article", program)
+            : base("Key-Search", program)
         {
         }
 
@@ -24,7 +24,7 @@ namespace Encyclopedy
             var result = db.Articles.GetAll().
                     Where(q => (q.Title + " " + q.Main).
                     ToLower().
-                    Contains(keyword.ToLower()))
+                    Contains(keyword.ToLower())).OrderBy(a => a)
                     .ToList();
              
 

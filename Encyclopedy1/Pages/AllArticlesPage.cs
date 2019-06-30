@@ -6,7 +6,7 @@ namespace Encyclopedy
     class AllArticlesPage : Page
     {
         public AllArticlesPage(Program program) 
-            : base("", program)
+            : base("All Articles Page", program)
         {}
 
         public override void Display()
@@ -17,7 +17,7 @@ namespace Encyclopedy
 
             var result = (from article
                     in db.Articles.GetAll()
-                select article.Title).ToList();
+                select article.Title).OrderBy(a=>a).ToList();
 
 
             string input = Input.ReadList(result, "Select: ");

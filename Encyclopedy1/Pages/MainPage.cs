@@ -7,8 +7,7 @@
             : base("Main Page", program,
                   new Option("Sign In", () => program.NavigateTo<SignInPage>()),
                   new Option("Search Article", () => program.NavigateTo<MainSearchArticlePage>()),
-                  new Option("Search User", () => program.NavigateTo<Page1Ai>()),
-                  new Option("Input", () => program.NavigateTo<InputPage>()))
+                  new Option("Add Article", () => program.NavigateTo<AddPage>()))
         {
         }
     }
