@@ -26,6 +26,7 @@ namespace Encyclopedy
                 }
                 else
                 {
+                    DataAccesManager dataAccesManager = new DataAccesManager();
                     var editableProperty = typeof(Article).GetProperty(editable);
                     Output.WriteLine(ConsoleColor.DarkRed, $"The old version of {editable}:");
                     Output.WriteLine(editableProperty.GetValue(article,null).ToString());
@@ -33,7 +34,7 @@ namespace Encyclopedy
                     string newversion = null;
                     if (editable == "Title") newversion = Input.ReadString("");
                     else newversion = Input.ReadText("");
-                    Controller.MakeEdit(article.Id, editor.Login, editable, newversion);
+                    dataAccesManager.MakeEdit(article.Id, editor.Login, editable, newversion);
                     Output.WriteLine(ConsoleColor.Green, "Article is edited.");
                 }
             }

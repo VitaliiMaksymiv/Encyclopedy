@@ -41,7 +41,8 @@ namespace Encyclopedy
             }
             else
             {
-                Controller.AddUser(login, password, name, surname, email);
+                DataAccesManager dataAccesManager = new DataAccesManager();
+                dataAccesManager.AddUser(login, password, name, surname, email);
                 Output.WriteLine(ConsoleColor.Green, "Registration Succeed");
             }
             Input.ReadString("Press [Enter] to navigate home");

@@ -11,13 +11,13 @@ namespace Encyclopedy
         public override void Display()
         {
             base.Display();
-
+            DataAccesManager dataAccesManager = new DataAccesManager();
             Output.WriteLine(ConsoleColor.DarkYellow, "LOG IN");
             string login = "";
             string password = "";
             login = Input.ReadString("Login: ");
             password = Input.ReadPassword("Password: ");
-            Controller.Login(login,password);
+            dataAccesManager.Login(login,password);
             Input.ReadString("Press [Enter] to navigate home");
             Program.NavigateHome();
         }

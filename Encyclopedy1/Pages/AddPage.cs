@@ -17,6 +17,7 @@ namespace Encyclopedy
             User user = LoginedUser.GetInstance().User;
             if (user != null)
             {
+                DataAccesManager dataAccesManager = new DataAccesManager();
                 Output.WriteLine(ConsoleColor.Cyan, "Fill in the following fields.");
                 Output.WriteLine(ConsoleColor.DarkCyan, "Branch:");
                 string branch = Input.ReadString("");
@@ -30,7 +31,7 @@ namespace Encyclopedy
                 string content = Input.ReadText("");
                 Output.WriteLine(ConsoleColor.DarkCyan, "Main part:");
                 string main = Input.ReadText("");
-                Controller.CreateArticle(branch,subbranch,title,intro,content,main,user.Login);
+                dataAccesManager.CreateArticle(branch,subbranch,title,intro,content,main,user.Login);
                 Output.WriteLine(ConsoleColor.Green, "Article is added.");
                 
             }

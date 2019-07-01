@@ -24,7 +24,7 @@ namespace Encyclopedy
             var result = db.Articles.GetAll().
                     Where(q => (q.Title + " " + q.Main).
                     ToLower().
-                    Contains(keyword.ToLower())).OrderBy(a => a)
+                    Contains(keyword.ToLower())).OrderBy(a => a.Title)
                     .ToList();
              
 
@@ -44,9 +44,6 @@ namespace Encyclopedy
             {
                 Program.NavigateTo<ArticlePage>(db.Articles.GetAll().Where(X => X.Title == input).SingleOrDefault());
             }
-            //db.Articles.GetAll().Where(X=> X.Title== input).SingleOrDefault()
-
-
 
             Input.ReadString("Press [Enter] to navigate home");
             Program.NavigateHome();
