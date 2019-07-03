@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
+﻿using System.Collections.Generic;
+using Encyclopedy;
 using Microsoft.EntityFrameworkCore;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Repository
 {
     public class Repository<TKey, TEntity>: IRepository<TKey,TEntity> where TEntity : class
     {
-        private EncyclopedyContext _db;
-        private DbSet<TEntity> _dbSet;
+        private readonly EncyclopedyContext _db;
+        private readonly DbSet<TEntity> _dbSet;
 
         public Repository(EncyclopedyContext db)
         {
-            this._db = db;
-            this._dbSet = db.Set<TEntity>();
+            _db = db;
+            _dbSet = db.Set<TEntity>();
         }
 
         public IEnumerable<TEntity> GetAll()

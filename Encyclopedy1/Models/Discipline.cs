@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Models
 {
-    public class Discipline
+    public sealed class Discipline
     {
         public Discipline()
         {
@@ -12,6 +12,6 @@ namespace Encyclopedy
         public int Id { get; set; }
         public string Branch{ get; set; }
         public string Subbranch { get; set; }
-        public virtual ICollection<Article> Articles { get; set; }
+        public ICollection<Article> Articles { get; set; }
     }
 }

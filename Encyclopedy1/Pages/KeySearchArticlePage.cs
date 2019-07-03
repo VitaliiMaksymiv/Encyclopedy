@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using Microsoft.EntityFrameworkCore;
-using Remotion.Linq.Clauses;
+using Encyclopedy1.Console;
+using Encyclopedy1.Repository;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Pages
 {
-    class KeySearchArticlePage : Page
+    public class KeySearchArticlePage : Page
     {
         public KeySearchArticlePage(Program program)
             : base("Key-Search", program)
@@ -42,7 +40,7 @@ namespace Encyclopedy
             }
             else
             {
-                Program.NavigateTo<ArticlePage>(db.Articles.GetAll().Where(X => X.Title == input).SingleOrDefault());
+                Program.NavigateTo<ArticlePage>(db.Articles.GetAll().SingleOrDefault(x => x.Title == input));
             }
 
             Input.ReadString("Press [Enter] to navigate home");

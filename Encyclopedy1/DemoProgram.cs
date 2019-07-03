@@ -1,6 +1,9 @@
-﻿namespace Encyclopedy
+﻿using Encyclopedy1.Console;
+using Encyclopedy1.Pages;
+
+namespace Encyclopedy1
 {
-    class DemoProgram : Program
+    public class DemoProgram : Program
     {
         public DemoProgram()
             : base("Encyclopedy")

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Encyclopedy1.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Encyclopedy
 {

@@ -1,6 +1,8 @@
 ﻿using System;
+using Encyclopedy;
+using Encyclopedy1.Models;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Repository
 {
     public class UnitOfWork : IDisposable
     {

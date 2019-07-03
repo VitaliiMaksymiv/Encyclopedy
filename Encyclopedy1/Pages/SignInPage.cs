@@ -1,6 +1,8 @@
-﻿namespace Encyclopedy
+﻿using Encyclopedy1.Console;
+
+namespace Encyclopedy1.Pages
 {
-    class SignInPage : MenuPage
+    public class SignInPage : MenuPage
     {
         public SignInPage(Program program)
             : base("Sign In Page", program,

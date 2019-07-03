@@ -1,20 +1,11 @@
-﻿using System;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection;
-using Microsoft.EntityFrameworkCore;
-
-namespace Encyclopedy
+﻿namespace Encyclopedy1
 {
     public class Start
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            Console.WriteLine("ENCYCLOPEDY 3.0");
+            System.Console.WriteLine("ENCYCLOPEDY 3.0");
             new DemoProgram().Run();
-
-            Console.ReadKey();
-
         }
     }
 }

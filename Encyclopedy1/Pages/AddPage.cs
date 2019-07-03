@@ -1,9 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
+using Encyclopedy1.Console;
+using Encyclopedy1.Models;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Pages
 {
-    class AddPage : Page
+    public class AddPage : Page
     {
         public AddPage(Program program)
             : base("Adding new article", program)
@@ -14,7 +15,7 @@ namespace Encyclopedy
         {
             base.Display();
 
-            User user = LoginedUser.GetInstance().User;
+            User user = AuthenticationProvider.GetInstance().LoggedUser;
             if (user != null)
             {
                 DataAccesManager dataAccesManager = new DataAccesManager();

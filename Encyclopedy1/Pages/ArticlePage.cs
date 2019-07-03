@@ -1,8 +1,11 @@
 ﻿using System;
+using Encyclopedy1.Console;
+using Encyclopedy1.Models;
+using Encyclopedy1.Repository;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Pages
 {
-    class ArticlePage: Page
+    public class ArticlePage: Page
     {
         public ArticlePage(Program program)
             : base("Article Page",program)
@@ -22,7 +25,7 @@ namespace Encyclopedy
             Output.WriteLine(article.Main+ "\n");
 
             Output.WriteLine(ConsoleColor.DarkMagenta,"\nPress [E] to edit this article or another key to navigate home");
-            var key = Console.ReadKey(true);
+            var key = System.Console.ReadKey(true);
             if (key.Key == ConsoleKey.E)
                 Program.NavigateTo<EditPage>(article);
             else Program.NavigateHome();

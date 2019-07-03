@@ -1,6 +1,8 @@
-﻿namespace Encyclopedy
+﻿using Encyclopedy1.Console;
+
+namespace Encyclopedy1.Pages
 {
-    class MainSearchArticlePage : MenuPage
+    public class MainSearchArticlePage : MenuPage
     {
         public MainSearchArticlePage(Program program):
             base("Select variant of searching", program,

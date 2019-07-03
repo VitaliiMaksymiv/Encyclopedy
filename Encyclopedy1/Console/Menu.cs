@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Console
 {
     public class Menu
     {
-        private IList<Option> Options { get; set; }
+        private IList<Option> Options { get; }
 
         public Menu()
         {
@@ -16,7 +16,7 @@ namespace Encyclopedy
         public void Display()
         {
             for (var index = 0; index < Options.Count; ++index)
-                Console.WriteLine("{0}. {1}", index + 1, Options[index].Name);
+                System.Console.WriteLine("{0}. {1}", index + 1, Options[index].Name);
             Options[Input.ReadInt("Choose an option:", 1, Options.Count) - 1].Callback();
         }
 

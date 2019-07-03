@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Models
 {
 
-    public class User
+    public sealed class User
     {
         public User()
         {
@@ -20,8 +19,8 @@ namespace Encyclopedy
         public string Email { get; set; }
         public int? Editnum { get; set; }
 
-        public virtual ICollection<Article> Articles { get; set; }
+        public ICollection<Article> Articles { get; set; }
 
-        public virtual ICollection<Edit> Edits { get; set; }
+        public ICollection<Edit> Edits { get; set; }
     }
 }

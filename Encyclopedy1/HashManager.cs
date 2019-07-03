@@ -1,17 +1,22 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Encyclopedy
+namespace Encyclopedy1
 {
     public class HashManager
     {
+        /// <summary>
+        /// Convert password to hash-code.
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public string HashPassword(string password)
         {
             byte[] salt;
             byte[] buffer2;
             if (password == null)
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
             using (Rfc2898DeriveBytes bytes = new Rfc2898DeriveBytes(password, 0x10, 0x3e8))
             {
@@ -23,7 +28,12 @@ namespace Encyclopedy
             Buffer.BlockCopy(buffer2, 0, dst, 0x11, 0x20);
             return Convert.ToBase64String(dst);
         }
-
+        /// <summary>
+        /// Checks whether the encrypted password and string-password are the same.
+        /// </summary>
+        /// <param name="hashedPassword"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public bool VerifyHashedPassword(string hashedPassword, string password)
         {
             byte[] buffer4;
@@ -33,7 +43,7 @@ namespace Encyclopedy
             }
             if (password == null)
             {
-                throw new ArgumentNullException("password");
+                throw new ArgumentNullException(nameof(password));
             }
             byte[] src = Convert.FromBase64String(hashedPassword);
             if ((src.Length != 0x31) || (src[0] != 0))
@@ -48,10 +58,15 @@ namespace Encyclopedy
             {
                 buffer4 = bytes.GetBytes(0x20);
             }
-            return ByteArraysEqual(buffer3, buffer4);
+            return IsByteArraysEqual(buffer3, buffer4);
         }
-
-        private bool ByteArraysEqual(byte[] b1, byte[] b2)
+        /// <summary>
+        /// Checks whether arrays are the same.
+        /// </summary>
+        /// <param name="b1"></param>
+        /// <param name="b2"></param>
+        /// <returns></returns>
+        private bool IsByteArraysEqual(byte[] b1, byte[] b2)
         {
             if (b1 == b2) return true;
             if (b1 == null || b2 == null) return false;

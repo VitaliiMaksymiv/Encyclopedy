@@ -1,6 +1,8 @@
-﻿namespace Encyclopedy
+﻿using Encyclopedy1.Console;
+
+namespace Encyclopedy1.Pages
 {
-    class MainPage : MenuPage
+    public class MainPage : MenuPage
     {
         
         public MainPage(Program program)

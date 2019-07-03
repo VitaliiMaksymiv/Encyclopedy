@@ -2,33 +2,34 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using Encyclopedy1.Models;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Console
 {
     public class Program
     {
-        private string Title { get; set; }
+        private readonly string _title;
+
+        private readonly Dictionary<Type, Page> _pages;
 
         private Page CurrentPage => History.Any() ? History.Peek() : null;
 
-        private Dictionary<Type, Page> Pages { get; set; }
-
-        public Stack<Page> History { get; private set; }
-
-        public bool NavigationEnabled => History.Count > 1;
-
         public Program(string title)
         {
-            Title = title;
-            Pages = new Dictionary<Type, Page>();
+            _title = title;
+            _pages = new Dictionary<Type, Page>();
             History = new Stack<Page>();
         }
 
-        public virtual void Run()
+        public Stack<Page> History { get; }
+
+        public bool IsNavigationEnabled => History.Count > 1;
+
+        public void Run()
         {
             try
             {
-                Console.Title = Title;
+                System.Console.Title = _title;
                 CurrentPage.Display();
             }
             catch (Exception ex)
@@ -45,17 +46,17 @@ namespace Encyclopedy
         public void AddPage(Page page)
         {
             var type = page.GetType();
-            if (Pages.ContainsKey(type))
-                Pages[type] = page;
+            if (_pages.ContainsKey(type))
+                _pages[type] = page;
             else
-                Pages.Add(type, page);
+                _pages.Add(type, page);
         }
 
         public void NavigateHome()
         {
             while (History.Count > 1)
                 History.Pop();
-            Console.Clear();
+            System.Console.Clear();
             CurrentPage.Display();
         }
 
@@ -64,8 +65,7 @@ namespace Encyclopedy
             var key = typeof(T);
             if (CurrentPage != null && CurrentPage.GetType() == key)
                 return CurrentPage as T;
-            Page page;
-            if (!Pages.TryGetValue(key, out page))
+            if (!_pages.TryGetValue(key, out var page))
                 throw new KeyNotFoundException("The given page was not present in the program");
             History.Push(page);
             return CurrentPage as T;
@@ -74,14 +74,14 @@ namespace Encyclopedy
         public T NavigateTo<T>() where T : Page
         {
             SetPage<T>();
-            Console.Clear();
+            System.Console.Clear();
             CurrentPage.Display();
             return CurrentPage as T;
         }
         public T NavigateTo<T>(Article article) where T : Page
         {
             SetPage<T>();
-            Console.Clear();
+            System.Console.Clear();
             CurrentPage.Display(article);
             return CurrentPage as T;
         }
@@ -89,7 +89,7 @@ namespace Encyclopedy
         public Page NavigateBack()
         {
             History.Pop();
-            Console.Clear();
+            System.Console.Clear();
             CurrentPage.Display();
             return CurrentPage;
         }

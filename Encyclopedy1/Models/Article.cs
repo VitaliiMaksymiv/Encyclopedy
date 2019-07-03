@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Models
 {
-    public class Article
+    public sealed class Article
     {
         public Article()
         {
@@ -16,11 +16,12 @@ namespace Encyclopedy
         public string Content { get; set; }
         public string Main { get; set; }
         public int Version { get; set; }
-        [ForeignKey("User")]
+
+        [ForeignKey("LoggedUser")]
         public string Lasteditor { get; set; }
 
-        public virtual Discipline Discipline { get; set; }
-        public virtual User User { get; set; }
-        public virtual ICollection<Edit> Edits { get; set; }
+        public Discipline Discipline { get; set; }
+        public User User { get; set; }
+        public ICollection<Edit> Edits { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Repository
 {
     public interface IRepository<K,T> where T : class
     {

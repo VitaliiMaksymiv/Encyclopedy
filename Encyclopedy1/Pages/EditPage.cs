@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Encyclopedy1.Console;
+using Encyclopedy1.Models;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Pages
 {
-    class EditPage : Page
+    public class EditPage : Page
     {
         public EditPage(Program program)
             : base("Editing", program)
@@ -14,7 +16,7 @@ namespace Encyclopedy
         {
             base.Display();
 
-            User editor = LoginedUser.GetInstance().User;
+            User editor = AuthenticationProvider.GetInstance().LoggedUser;
             if (editor != null)
             {
                 Output.WriteLine(ConsoleColor.DarkMagenta, $"'{article.Title}' editing\n");
@@ -31,9 +33,7 @@ namespace Encyclopedy
                     Output.WriteLine(ConsoleColor.DarkRed, $"The old version of {editable}:");
                     Output.WriteLine(editableProperty.GetValue(article,null).ToString());
                     Output.WriteLine(ConsoleColor.DarkCyan,$"Enter a new version of {editable} in {article.Title} article:");
-                    string newversion = null;
-                    if (editable == "Title") newversion = Input.ReadString("");
-                    else newversion = Input.ReadText("");
+                    var newversion = editable == "Title" ? Input.ReadString("") : Input.ReadText("");
                     dataAccesManager.MakeEdit(article.Id, editor.Login, editable, newversion);
                     Output.WriteLine(ConsoleColor.Green, "Article is edited.");
                 }

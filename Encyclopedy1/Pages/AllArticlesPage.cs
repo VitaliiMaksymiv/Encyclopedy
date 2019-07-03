@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using Encyclopedy1.Console;
+using Encyclopedy1.Repository;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Pages
 {
-    class AllArticlesPage : Page
+    public class AllArticlesPage : Page
     {
         public AllArticlesPage(Program program) 
             : base("All Articles Page", program)
@@ -27,7 +28,7 @@ namespace Encyclopedy
             }
             else
             {
-                Program.NavigateTo<ArticlePage>(db.Articles.GetAll().Where(X => X.Title == input).SingleOrDefault());
+                Program.NavigateTo<ArticlePage>(db.Articles.GetAll().SingleOrDefault(x => x.Title == input));
             }
         }
     }

@@ -1,18 +1,18 @@
 ﻿using System;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Console
 { 
     public class Option
     {
-        public string Name { get; private set; }
-
-        public Action Callback { get; private set; }
-
         public Option(string name, Action callback)
         {
             Name = name;
             Callback = callback;
         }
+
+        public string Name { get; }
+
+        public Action Callback { get; }
 
         public override string ToString()
         {

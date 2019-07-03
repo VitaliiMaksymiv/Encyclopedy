@@ -1,10 +1,8 @@
-﻿namespace Encyclopedy
+﻿namespace Encyclopedy1.Console
 {
     public abstract class MenuPage : Page
     {
-        public Menu Menu { get; set; }
-
-        public MenuPage(string title, Program program, params Option[] options)
+        protected MenuPage(string title, Program program, params Option[] options)
             : base(title, program)
         {
             Menu = new Menu();
@@ -12,10 +10,12 @@
                 Menu.Add(option);
         }
 
+        public Menu Menu { get; set; }
+
         public override void Display()
         {
             base.Display();
-            if (Program.NavigationEnabled && !Menu.Contains("Go back"))
+            if (Program.IsNavigationEnabled && !Menu.Contains("Go back"))
                 Menu.Add("Go back", () => Program.NavigateBack());
             Menu.Display();
         }

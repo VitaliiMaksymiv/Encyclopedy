@@ -92,7 +92,7 @@ namespace Encyclopedy1.Migrations
                     b.ToTable("Edits");
                 });
 
-            modelBuilder.Entity("Encyclopedy.User", b =>
+            modelBuilder.Entity("Encyclopedy.LoggedUser", b =>
                 {
                     b.Property<string>("Login")
                         .ValueGeneratedOnAdd();
@@ -119,7 +119,7 @@ namespace Encyclopedy1.Migrations
                         .HasForeignKey("DisciplineId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Encyclopedy.User", "User")
+                    b.HasOne("Encyclopedy.LoggedUser", "LoggedUser")
                         .WithMany("Articles")
                         .HasForeignKey("Lasteditor");
                 });
@@ -130,7 +130,7 @@ namespace Encyclopedy1.Migrations
                         .WithMany("Edits")
                         .HasForeignKey("ArticleId");
 
-                    b.HasOne("Encyclopedy.User", "User")
+                    b.HasOne("Encyclopedy.LoggedUser", "LoggedUser")
                         .WithMany("Edits")
                         .HasForeignKey("UserId");
                 });

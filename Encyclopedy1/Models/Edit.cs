@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Models
 {
     public class Edit
     {

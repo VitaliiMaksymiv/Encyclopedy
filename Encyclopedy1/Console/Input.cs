@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Console
 {
     public static class Input
     {
@@ -24,7 +23,7 @@ namespace Encyclopedy
         public static int ReadInt()
         {
             int result;
-            for (string s = Console.ReadLine(); !int.TryParse(s, out result); s = Console.ReadLine())
+            for (string s = System.Console.ReadLine(); !int.TryParse(s, out result); s = System.Console.ReadLine())
                 Output.DisplayPrompt("Please enter an integer");
             return result;
         }
@@ -32,7 +31,7 @@ namespace Encyclopedy
         public static string ReadString(string prompt)
         {
             Output.DisplayPrompt(prompt);
-            return Console.ReadLine();
+            return System.Console.ReadLine();
         }
 
         public static string ReadText(string prompt)
@@ -40,12 +39,12 @@ namespace Encyclopedy
             Output.DisplayPrompt(prompt);
             Output.WriteLine(ConsoleColor.Red, "Write '!STOP!' to end! \n");
             byte[] inputBuffer = new byte[4096];
-            Stream inputStream = Console.OpenStandardInput(inputBuffer.Length);
-            Console.SetIn(new StreamReader(inputStream, Console.InputEncoding, false, inputBuffer.Length));
+            Stream inputStream = System.Console.OpenStandardInput(inputBuffer.Length);
+            System.Console.SetIn(new StreamReader(inputStream, System.Console.InputEncoding, false, inputBuffer.Length));
             string text = "";
             while (true)
             {
-                string line = Console.ReadLine();
+                string line = System.Console.ReadLine();
                 if (line == "!STOP!")
                 {
                     text = text.TrimEnd('\n');
@@ -57,36 +56,36 @@ namespace Encyclopedy
                     text += "\n";
                 }
             }
-            Console.Write('\n');
+            System.Console.Write('\n');
             return text;
         }
 
         public static string ReadPassword(string prompt)
         {
             Output.DisplayPrompt(prompt);
-            string password = "";
+            string password = string.Empty;
             int counter = 0;
             while (true)
             {
 
-                var key = Console.ReadKey(true);
+                var key = System.Console.ReadKey(true);
 
                 if (key.Key == ConsoleKey.Enter) break;
                 if (key.Key == ConsoleKey.Backspace && counter > 0)
                 {
-                    Console.Write("\b \b");
+                    System.Console.Write("\b \b");
                     password = password.Substring(0, (password.Length - 1));
                     counter--;
 
                 }
                 else if (char.IsLetter(key.KeyChar) || char.IsNumber(key.KeyChar) || char.IsSymbol(key.KeyChar) || char.IsPunctuation(key.KeyChar))
                 { 
-                    Console.Write("*");
+                    System.Console.Write("*");
                     password += key.KeyChar;
                     counter++;
                 }
             }
-            Console.Write('\n');
+            System.Console.Write('\n');
 
             return password;
         }
@@ -96,10 +95,10 @@ namespace Encyclopedy
                 Output.WriteLine(prompt);
                 Menu menu = new Menu();
                 string choice = default(string);
-                for (var i = 0; i < listString.Count; i++)
+                foreach (var stringValue in listString)
                 {
-                    string stringValue = listString[i];
-                    menu.Add(stringValue, () => choice = stringValue);
+                    var value = stringValue;
+                    menu.Add(stringValue, () => choice = value);
                 }
                 menu.Add("Go back", () => choice = "Go back");
                 menu.Display();

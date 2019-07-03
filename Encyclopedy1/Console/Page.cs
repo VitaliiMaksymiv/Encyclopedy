@@ -1,30 +1,28 @@
-﻿using System;
-using System.Linq;
+﻿using Encyclopedy1.Models;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Console
 {
     public abstract class Page
     {
-        public string Title { get; private set; }
-
-        public Program Program { get; set; }
-
-        public Page(string title, Program program)
+        protected Page(string title, Program program)
         {
             Title = title;
             Program = program;
         }
 
+        public string Title { get; }
+        public Program Program { get; set; }
+
         public virtual void Display()
         {
-            Console.WriteLine(Title);
-            Console.WriteLine("---");
+            System.Console.WriteLine(Title);
+            System.Console.WriteLine("---");
         }
 
         public virtual void Display(Article article)
         {
-            Console.WriteLine(Title);
-            Console.WriteLine("---");
+            System.Console.WriteLine(Title);
+            System.Console.WriteLine("---");
         }
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
+using Encyclopedy1.Console;
 
-namespace Encyclopedy
+namespace Encyclopedy1.Pages
 {
-    class LogInPage : Page
+    public class LogInPage : Page
     {
         public LogInPage(Program program)
             : base("Log in", program)
@@ -13,10 +14,8 @@ namespace Encyclopedy
             base.Display();
             DataAccesManager dataAccesManager = new DataAccesManager();
             Output.WriteLine(ConsoleColor.DarkYellow, "LOG IN");
-            string login = "";
-            string password = "";
-            login = Input.ReadString("Login: ");
-            password = Input.ReadPassword("Password: ");
+            var login = Input.ReadString("Login: ");
+            var password = Input.ReadPassword("Password: ");
             dataAccesManager.Login(login,password);
             Input.ReadString("Press [Enter] to navigate home");
             Program.NavigateHome();
