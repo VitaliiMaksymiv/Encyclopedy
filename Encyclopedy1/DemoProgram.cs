@@ -1,8 +1,8 @@
-﻿using Encyclopedy1.Console;
-using Encyclopedy1.Pages;
-
-namespace Encyclopedy1
+﻿namespace Encyclopedy1
 {
+    using Encyclopedy1.Console;
+    using Encyclopedy1.Pages;
+
     public class DemoProgram : Program
     {
         public DemoProgram()

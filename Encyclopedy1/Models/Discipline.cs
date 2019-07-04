@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
-namespace Encyclopedy1.Models
+﻿namespace Encyclopedy1.Models
 {
+    using System.Collections.Generic;
+
     public sealed class Discipline
     {
         public Discipline()
@@ -10,8 +10,11 @@ namespace Encyclopedy1.Models
         }
 
         public int Id { get; set; }
-        public string Branch{ get; set; }
+
+        public string Branch { get; set; }
+
         public string Subbranch { get; set; }
+
         public ICollection<Article> Articles { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System;
-using Encyclopedy1.Console;
-using Encyclopedy1.Repository;
-
-namespace Encyclopedy1.Pages
+﻿namespace Encyclopedy1.Pages
 {
+    using System;
+    using Encyclopedy1.Console;
+    using Encyclopedy1.Repository;
+
     public class RegisterPage : Page
     {
         public RegisterPage(Program program)
@@ -15,7 +15,7 @@ namespace Encyclopedy1.Pages
         {
             base.Display();
 
-            Output.WriteLine(ConsoleColor.DarkYellow,"REGISTRATION FORM:");
+            Output.WriteLine(ConsoleColor.DarkYellow, "REGISTRATION FORM:");
 
             var name = Input.ReadString("Name: ");
             var surname = Input.ReadString("Surname: ");
@@ -24,7 +24,7 @@ namespace Encyclopedy1.Pages
             var password = Input.ReadPassword("Password: ");
             var password2 = Input.ReadPassword("Repeat password: ");
 
-            if (name == "" || surname == "" || login == "" || email == "" || password == "")
+            if (name == string.Empty || surname == string.Empty || login == string.Empty || email == string.Empty || password == string.Empty)
             {
                 Output.WriteLine(ConsoleColor.Red, "Should not be empty lines!\nRegistration Failed");
             }
@@ -42,6 +42,7 @@ namespace Encyclopedy1.Pages
                 dataAccesManager.AddUser(login, password, name, surname, email);
                 Output.WriteLine(ConsoleColor.Green, "Registration Succeed");
             }
+
             Input.ReadString("Press [Enter] to navigate home");
             Program.NavigateHome();
         }

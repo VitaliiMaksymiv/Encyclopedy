@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
-
-namespace Encyclopedy1.Repository
+﻿namespace Encyclopedy1.Repository
 {
-    public interface IRepository<K,T> where T : class
+    using System.Collections.Generic;
+
+    public interface IRepository<TK, T>
+        where T : class
     {
         IEnumerable<T> GetAll();
-        T Get(K id);
+
+        T Get(TK id);
+
         void Create(T item);
+
         void Update(T item);
-        void Delete(K id);
+
+        void Delete(TK id);
     }
 }

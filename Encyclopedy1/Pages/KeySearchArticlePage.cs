@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using Encyclopedy1.Console;
-using Encyclopedy1.Repository;
-
-namespace Encyclopedy1.Pages
+﻿namespace Encyclopedy1.Pages
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using Encyclopedy1.Console;
+    using Encyclopedy1.Repository;
+
     public class KeySearchArticlePage : Page
     {
         public KeySearchArticlePage(Program program)
@@ -12,11 +12,10 @@ namespace Encyclopedy1.Pages
         {
         }
 
-
         public override void Display()
         {
             base.Display();
-            UnitOfWork db = new UnitOfWork();
+            var db = new UnitOfWork();
             var keyword = Input.ReadString("Enter a key word: ");
 
             var result = db.Articles.GetAll().
@@ -24,16 +23,12 @@ namespace Encyclopedy1.Pages
                     ToLower().
                     Contains(keyword.ToLower())).OrderBy(a => a.Title)
                     .ToList();
-             
-
 
             var resultstring = new List<string>();
 
             result.ForEach(x => resultstring.Add(x.Title));
 
-
-
-            string input = Input.ReadList(resultstring,"Select an article: ");
+            var input = Input.ReadList(resultstring, "Select an article: ");
             if (input == "Go back")
             {
                 Program.NavigateBack();

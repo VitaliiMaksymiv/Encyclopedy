@@ -1,6 +1,6 @@
 ﻿namespace Encyclopedy1
 {
-    using Models;
+    using Encyclopedy1.Models;
 
     /// <summary>
     /// Singleton class of logged user.
@@ -14,10 +14,11 @@
         }
 
         public User LoggedUser { get; set; }
+
         /// <summary>
-        /// Returns the instance of logined user.
+        /// Returns the instance of logged user.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The instance of logged user.</returns>
         public static AuthenticationProvider GetInstance()
         {
             return _instance ?? (_instance = new AuthenticationProvider());

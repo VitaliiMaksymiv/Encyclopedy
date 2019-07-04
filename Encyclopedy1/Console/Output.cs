@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Encyclopedy1.Console
+﻿namespace Encyclopedy1.Console
 {
+    using System;
+
     public static class Output
     {
         public static void WriteLine(ConsoleColor color, string value)

@@ -6,8 +6,10 @@
             : base(title, program)
         {
             Menu = new Menu();
-            foreach (Option option in options)
+            foreach (var option in options)
+            {
                 Menu.Add(option);
+            }
         }
 
         public Menu Menu { get; set; }
@@ -16,7 +18,10 @@
         {
             base.Display();
             if (Program.IsNavigationEnabled && !Menu.Contains("Go back"))
+            {
                 Menu.Add("Go back", () => Program.NavigateBack());
+            }
+
             Menu.Display();
         }
     }

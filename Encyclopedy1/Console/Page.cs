@@ -1,7 +1,7 @@
-﻿using Encyclopedy1.Models;
-
-namespace Encyclopedy1.Console
+﻿namespace Encyclopedy1.Console
 {
+    using Encyclopedy1.Models;
+
     public abstract class Page
     {
         protected Page(string title, Program program)
@@ -11,6 +11,7 @@ namespace Encyclopedy1.Console
         }
 
         public string Title { get; }
+
         public Program Program { get; set; }
 
         public virtual void Display()

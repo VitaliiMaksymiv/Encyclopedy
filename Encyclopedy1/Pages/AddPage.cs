@@ -1,9 +1,8 @@
-﻿using System;
-using Encyclopedy1.Console;
-using Encyclopedy1.Models;
-
-namespace Encyclopedy1.Pages
+﻿namespace Encyclopedy1.Pages
 {
+    using System;
+    using Encyclopedy1.Console;
+
     public class AddPage : Page
     {
         public AddPage(Program program)
@@ -15,32 +14,30 @@ namespace Encyclopedy1.Pages
         {
             base.Display();
 
-            User user = AuthenticationProvider.GetInstance().LoggedUser;
+            var user = AuthenticationProvider.GetInstance().LoggedUser;
             if (user != null)
             {
-                DataAccesManager dataAccesManager = new DataAccesManager();
+                var dataAccesManager = new DataAccesManager();
                 Output.WriteLine(ConsoleColor.Cyan, "Fill in the following fields.");
                 Output.WriteLine(ConsoleColor.DarkCyan, "Branch:");
-                string branch = Input.ReadString("");
+                var branch = Input.ReadString(string.Empty);
                 Output.WriteLine(ConsoleColor.DarkCyan, "Subbranch:");
-                string subbranch = Input.ReadString("");
+                var subbranch = Input.ReadString(string.Empty);
                 Output.WriteLine(ConsoleColor.DarkCyan, "Title:");
-                string title = Input.ReadString("");
+                var title = Input.ReadString(string.Empty);
                 Output.WriteLine(ConsoleColor.DarkCyan, "Intro:");
-                string intro = Input.ReadText("");
+                var intro = Input.ReadText(string.Empty);
                 Output.WriteLine(ConsoleColor.DarkCyan, "Content:");
-                string content = Input.ReadText("");
+                var content = Input.ReadText(string.Empty);
                 Output.WriteLine(ConsoleColor.DarkCyan, "Main part:");
-                string main = Input.ReadText("");
-                dataAccesManager.CreateArticle(branch,subbranch,title,intro,content,main,user.Login);
+                var main = Input.ReadText(string.Empty);
+                dataAccesManager.CreateArticle(branch, subbranch, title, intro, content, main, user.Login);
                 Output.WriteLine(ConsoleColor.Green, "Article is added.");
-                
             }
             else
             {
                 Output.WriteLine(ConsoleColor.Red, "You must Log In to add articles.");
             }
-
 
             Input.ReadString("Press [Enter] to navigate home");
             Program.NavigateHome();

@@ -1,7 +1,7 @@
-﻿using System;
+﻿namespace Encyclopedy1.Console
+{
+    using System;
 
-namespace Encyclopedy1.Console
-{ 
     public class Option
     {
         public Option(string name, Action callback)

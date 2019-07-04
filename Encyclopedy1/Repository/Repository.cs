@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using Encyclopedy;
-using Microsoft.EntityFrameworkCore;
-
-namespace Encyclopedy1.Repository
+﻿namespace Encyclopedy1.Repository
 {
-    public class Repository<TKey, TEntity>: IRepository<TKey,TEntity> where TEntity : class
+    using System.Collections.Generic;
+    using Encyclopedy;
+    using Microsoft.EntityFrameworkCore;
+
+    public class Repository<TKey, TEntity> : IRepository<TKey, TEntity>
+        where TEntity : class
     {
         private readonly EncyclopedyContext _db;
         private readonly DbSet<TEntity> _dbSet;
@@ -37,10 +38,11 @@ namespace Encyclopedy1.Repository
 
         public void Delete(TKey id)
         {
-            TEntity entity = _dbSet.Find(id);
+            var entity = _dbSet.Find(id);
             if (entity != null)
+            {
                 _dbSet.Remove(entity);
+            }
         }
     }
-
 }
